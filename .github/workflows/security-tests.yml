@@ -25,21 +25,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Bosta Security Tests
-        run: |
-          newman run Bosta_Security_Testing.postman_collection.json \
-            --environment Bosta_Security_Environment.postman_environment.json \
-            --reporters cli \
-            --reporter-cli-no-banner
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: newman-test-results
-          path: newman/
-```
-
-4. Scroll down to **"Commit changes"**
-5. Write commit message:
-```
-Add CI/CD pipeline for security testing
+        run: newman run Bosta_Security_Testing.postman_collection.json --environment Bosta_Security_Environment.postman_environment.json --reporters cli --reporter-cli-no-banner
