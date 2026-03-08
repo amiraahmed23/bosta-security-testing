@@ -1,0 +1,45 @@
+name: Bosta Security API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Bosta Security Tests
+        run: |
+          newman run Bosta_Security_Testing.postman_collection.json \
+            --environment Bosta_Security_Environment.postman_environment.json \
+            --reporters cli \
+            --reporter-cli-no-banner
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: newman-test-results
+          path: newman/
+```
+
+4. Scroll down to **"Commit changes"**
+5. Write commit message:
+```
+Add CI/CD pipeline for security testing
