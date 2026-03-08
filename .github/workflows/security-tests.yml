@@ -25,4 +25,8 @@ jobs:
         run: npm install -g newman
 
       - name: Run Bosta Security Tests
-        run: newman run "Bosta Security Testing.postman_collection.json" --environment "Bosta Security Environment.postman_environment.json" --env-var "baseURL=https://stg-app.bosta.co" --reporters cli --reporter-cli-no-banner
+        env:
+          BASE_URL: https://stg-app.bosta.co
+          AUTH_TOKEN: bca27763f5f30353ba0ee3d2ebd8951994f5016e269bbd781798e2884274d631
+          EMAIL: amira.mosa+991@bosta.co
+        run: newman run "Bosta Security Testing.postman_collection.json" --environment "Bosta Security Environment.postman_environment.json" --env-var "baseURL=$BASE_URL" --env-var "authToken=$AUTH_TOKEN" --env-var "email=$EMAIL" --reporters cli --reporter-cli-no-banner
