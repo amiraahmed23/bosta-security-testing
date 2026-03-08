@@ -25,4 +25,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Bosta Security Tests
-        run: newman run Bosta_Security_Testing.postman_collection.json --environment Bosta_Security_Environment.postman_environment.json --reporters cli --reporter-cli-no-banner
+        run: newman run "Bosta Security Testing.postman_collection.json" --environment "Bosta Security Environment.postman_environment.json" --reporters cli --reporter-cli-no-banner
